@@ -1,0 +1,15 @@
+development:
+  adapter: postgresql
+  encoding: unicode
+  database: testdb_development
+  pool: 5
+  username: oleksii
+  password: 070302
+
+test:
+  adapter: postgresql
+  encoding: unicode
+  database: testdb_test
+  pool: 5
+  username: oleksii
+  password: 070302
