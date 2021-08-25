@@ -1,0 +1,19 @@
+<%if current_user.present? %>
+<%name = current_user.name%>
+<%elsif current_doctor.present? %>
+<%name = current_doctor.name%>
+<%else %>
+<%name = 'Stranger'%>
+<%end%>
+
+<h1>Welcome, <%= name %> </h1>
+<%if current_doctor.present?%>
+<a>List of my patients</a>
+<%elsif current_user.present?%>
+<a>Our doctors</a>
+<%else%>
+<p>Choose who you are:</p>
+<A HREF = "/users/sign_in">User</A>
+<br>
+<A HREF = "/doctors/sign_in">Doctor</A>
+<%end%>
