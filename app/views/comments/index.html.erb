@@ -1,0 +1,12 @@
+<h1>Comments</h1>
+<div>
+  <%= @comments.each do |a|%>
+  <div class="card" style="width: 18rem;">
+    <div class="card-body">
+      <h5 class="card-title">Appointment number:<%= a.appointment_id %></h5>
+      <p class="card-text">Doctor:  <%=a.appointment.doctor.name%> </p>
+      <p class="card-text">Comment:  <%=a.text%> </p>
+    </div>
+  </div>
+</div>
+<%end%>

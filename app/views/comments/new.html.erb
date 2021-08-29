@@ -1,0 +1,10 @@
+<h1>Add comment</h1>
+<%= form_for @comment  do |f| %>
+<%= f.label :id %><br />
+  <%= f.select :appointment_id, options_for_select(
+    @appointments.map{ |c| [c.id, {}] }) %><br/>
+  <%= f.label :text %><br />
+  <%= f.text_field :text %><br/>
+  <%= f.submit%>
+
+<% end %>

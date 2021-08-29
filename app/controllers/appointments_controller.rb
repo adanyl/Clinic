@@ -5,19 +5,13 @@ class AppointmentsController < ApplicationController
     end
 
     def create
-      @appointment = Appointment.new(user_params)
+      @appointment = Appointment.new(app_params)
       if @appointment.save
         redirect_to root_path
       end
     end
 
-    def destroy
-      @appointment = Appointment.find(params[:id])
-      @content.destroy
-      redirect_to root_path
-    end
-
-    def user_params
+    def app_params
       params.require(:appointment).permit(:user_id, :doctor_id, :date, :time)
     end
 

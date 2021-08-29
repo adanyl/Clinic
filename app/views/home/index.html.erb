@@ -11,7 +11,8 @@
 <a href="appointments/index">List of my patients</a>
 <%elsif current_user.present?%>
 <a href = "doctors/index">Our doctors</a><br/>
-<a href="/appointments/terminate">My appointments</a>
+<a href="/appointments/index">My appointments</a><br/>
+<a href="/comments/index">My comments</a>
 <%else%>
 <p>Choose who you are:</p>
 <A HREF = "/users/sign_in">User</A>

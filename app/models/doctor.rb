@@ -11,6 +11,9 @@ class Doctor < ApplicationRecord
  belongs_to :category, optional: true
 
  has_many :appointments, dependent: :destroy
+
+ validates_length_of :appointments, maximum: 10
+
  has_many :users, through: :appointments
 
  def self.search(search)

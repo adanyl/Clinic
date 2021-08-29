@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   root to: "home#index"
   
 resources :appointments 
+resources :comments
   get '/appointments/terminate'
   get '/appointments/index'
   get '/doctors/index'
