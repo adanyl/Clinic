@@ -10,10 +10,20 @@
 <%if current_doctor.present?%>
 <a>List of my patients</a>
 <%elsif current_user.present?%>
-<a>Our doctors</a>
+<a href = "doctors/index">Our doctors</a>
 <%else%>
 <p>Choose who you are:</p>
 <A HREF = "/users/sign_in">User</A>
 <br>
 <A HREF = "/doctors/sign_in">Doctor</A>
+
+<h1>Our doctors</h1>
+<%= @doctors.each do |doctor|%>
+<div class="card" style="width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title"><%= doctor.name %></h5>
+    <p class="card-text">Category: <%= doctor.category.present? ? doctor.category.name : "-" %></p>
+  </div>
+</div>
+<%end%>
 <%end%>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_25_111733) do
+ActiveRecord::Schema.define(version: 2021_08_28_195957) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,6 +41,17 @@ ActiveRecord::Schema.define(version: 2021_08_25_111733) do
     t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
   end
 
+  create_table "appointments", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "doctor_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.date "date"
+    t.time "time"
+    t.index ["doctor_id"], name: "index_appointments_on_doctor_id"
+    t.index ["user_id"], name: "index_appointments_on_user_id"
+  end
+
   create_table "categories", force: :cascade do |t|
     t.text "name"
     t.text "description"
@@ -58,7 +69,8 @@ ActiveRecord::Schema.define(version: 2021_08_25_111733) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "phone"
     t.string "name"
-    t.integer "category_id"
+    t.bigint "category_id"
+    t.index ["category_id"], name: "index_doctors_on_category_id"
     t.index ["reset_password_token"], name: "index_doctors_on_reset_password_token", unique: true
   end
 
@@ -75,4 +87,7 @@ ActiveRecord::Schema.define(version: 2021_08_25_111733) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "appointments", "doctors"
+  add_foreign_key "appointments", "users"
+  add_foreign_key "doctors", "categories"
 end
