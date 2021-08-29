@@ -2,52 +2,19 @@
 <h1>Find the doctor by the category</h1>
 <%= form_tag doctors_index_path, :method => 'get' do %>
 <%= collection_select :doctor, :category_id, Category.all, :id, :name, prompt: true %>
-<%= submit_tag "look"%>
+<%= submit_tag "Find"%>
 <%end%>
 
-<!--
-<select class="form-select" aria-label="Default select example">
-  <option selected>Open this select menu</option>
-  <%@categories.each do |category|%>
-  <option value = <%=category.name%> ><%=category.name%></option>
-  <%end%>
-</select>
--->
-
 <br/>
+<a href="/appointments/new" class="btn btn-primary">New appointment</a>
+
   <div>
   <%= @doctors.each do |doctor|%>
   <div class="card" style="width: 18rem;">
     <div class="card-body">
       <h5 class="card-title"><%= doctor.name %></h5>
       <p class="card-text">Category:  <%= doctor.category.present? ? doctor.category.name : "-"%> </p>
-      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="newAppointment<%= doctor.id %>">
-          New appointment
-      </button>
-    </div>
-  </div>
-
- <div class="modal fade" id="newAppointment<%= doctor.id %>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">New appointment with <%= doctor.name %></h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <%= form_with url: appointments_new_path do |f| %>
-        <div class="modal-body">
-          <%= f.select(:date, {}, { class: 'form-control' }) %>
-          <%= f.hidden_field :doctor_id, value: doctor.id %>
-          <%= f.hidden_field :user_id, value: current_user.id %>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="submit" class="btn btn-primary">Add appointment</button>
-        </div>
-        <% end %>
-      </div>
+       
     </div>
   </div>
 </div>

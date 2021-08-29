@@ -1,0 +1,26 @@
+<h1>My appointments</h1>
+<%if current_doctor.present?%>
+<div>
+  <%=@appointments.each do |a|%>
+  <div class="card" style="width: 18rem;">
+    <div class="card-body">
+      <h5 class="card-title"><%= a.user.name %></h5>
+      <p class="card-text">Date:  <%=a.date%> </p>
+      <p class="card-text">Time:  <%=a.time.to_s(:time)%> </p>
+    </div>
+  </div>
+</div>
+<%end%>
+<%elsif current_user.present?%>
+<div>
+  <%= @appointments.each do |a|%>
+  <div class="card" style="width: 18rem;">
+    <div class="card-body">
+      <h5 class="card-title"><%= a.doctor.name %></h5>
+      <p class="card-text">Date:  <%=a.date%> </p>
+      <p class="card-text">Time:  <%=a.time.to_s(:time)%> </p>
+    </div>
+  </div>
+</div>
+<%end%>
+<%end%>
