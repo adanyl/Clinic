@@ -4,24 +4,24 @@ class CommentsController < ApplicationController
         @appointments = Appointment.where(:doctor_id => current_doctor.id)
     end
   
-      def create
-        @comment = Comment.new(com_params)
+    def create
+      @comment = Comment.new(com_params)
         if @comment.save
           redirect_to root_path
         end
-      end
+    end
   
   
-      def com_params
+    def com_params
         params.require(:comment).permit(:appointment_id, :text)
-      end
+    end
   
-      def show
+    def show
         @appointment = Appointment.where(:user_id => current_user.id)
-          @comments = Comment.where(:appointment => @appointment)
-      end
+        @comments = Comment.where(:appointment => @appointment)
+    end
   
-      def index
-        @comments = Comment.where(:appointment.user_id => current_user.id)
-      end
+    def index
+      @comments = Comment.where(:appointment.user_id => current_user.id)
+    end
     end
