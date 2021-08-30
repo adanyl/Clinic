@@ -4,8 +4,8 @@ class DeviseCreateDoctors < ActiveRecord::Migration[6.1]
   def change
     create_table :doctors do |t|
       ## Database authenticatable
-      t.string :email,              null: false, default: ""
-      t.string :encrypted_password, null: false, default: ""
+      t.string :email,              null: false, default: ''
+      t.string :encrypted_password, null: false, default: ''
 
       ## Recoverable
       t.string   :reset_password_token
@@ -32,11 +32,9 @@ class DeviseCreateDoctors < ActiveRecord::Migration[6.1]
       # t.string   :unlock_token # Only if unlock strategy is :email or :both
       # t.datetime :locked_at
 
-
       t.timestamps null: false
     end
 
-   
     add_index :doctors, :reset_password_token, unique: true
     # add_index :doctors, :confirmation_token,   unique: true
     # add_index :doctors, :unlock_token,         unique: true
