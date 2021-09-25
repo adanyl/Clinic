@@ -9,7 +9,7 @@
 <a href="/appointments/new" class="btn btn-primary">New appointment</a>
 
   <div>
-  <%= @doctors.each do |doctor|%>
+  <% @doctors.each do |doctor|%>
   <div class="card" style="width: 18rem;">
     <div class="card-body">
       <h5 class="card-title"><%= doctor.name %></h5>

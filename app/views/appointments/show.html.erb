@@ -2,7 +2,7 @@
 <%if current_doctor.present?%>
 <a href="/comments/new" class="btn btn-primary">New comment</a>
 <div>
-  <%=@appointments.each do |a|%>
+  <% @appointments.each do |a|%>
   <div class="card" style="width: 18rem;">
     <div class="card-body">
       <h5 class="card-title"><%= a.user.name %></h5>
@@ -15,7 +15,7 @@
 <%end%>
 <%elsif current_user.present?%>
 <div>
-  <%= @appointments.each do |a|%>
+  <% @appointments.each do |a|%>
   <div class="card" style="width: 18rem;">
     <div class="card-body">
       <h5 class="card-title"><%= a.doctor.name %></h5>
