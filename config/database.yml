@@ -1,16 +1,24 @@
 default: &default
   adapter: postgresql
   encoding: unicode
-  pool: 5
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+
+development:
+  <<: *default
+  database: iclinic_development
   username: postgres
   password: postgres
   host: localhost
   port: 5432
 
-development:
-  <<: *default
-  database: iclinic_development
-
 test:
   <<: *default
   database: iclinic_test
+  username: postgres
+  password: postgres
+  host: localhost
+  port: 5432
+
+production:
+  <<: *default
+  url: <%= ENV['DATABASE_URL'] %>
