@@ -1,0 +1,19 @@
+<div class="col-md-4">
+  <% if @appointment.user.avatar.attached? %>
+    <%= image_tag @appointment.user.avatar.variant(resize: '500x500'), class: 'img-fluid rounded doctor-avatar' %>
+  <% else %>
+    <%= image_tag '/no_avatar.jpg', class: 'img-fluid rounded doctor-avatar' %>
+  <% end %>
+</div>
+<div class="col-md-8">
+  <h1>Пацієнт: <%= @appointment.user.name %></h1>
+  <p><strong>Електронна адреса:</strong> <%= @appointment.user.email.presence || 'н.д' %></p>
+  <p><strong>Номер телефону:</strong> <%= @appointment.user.phone %></p>
+  <p><strong>Дата:</strong> <%= @appointment.time_slot.date.strftime("%d/%m/%Y") %></p>
+  <p><strong>Час:</strong> <%= @appointment.time_slot.time.strftime("%H:%M") %></p>
+  <p><strong>Статус:</strong> <%= @appointment.ukr_status %></p>
+  <% if @appointment.comment.present? %>
+    <p><strong>Коментар доктора:</strong> <%= @appointment.comment %></p>
+  <% end %>
+  <%= link_to 'Завершити прийом', edit_appointment_path(@appointment), class: 'btn btn-primary' if @appointment.scheduled? %>
+</div>

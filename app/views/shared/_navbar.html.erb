@@ -1,0 +1,34 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <div class="container">
+    <%= link_to "IClinic", root_path, class: "navbar-brand" %>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        </li>
+        <li class="nav-item">
+          <%= link_to "Наші лікарі", our_doctors_path, class: "nav-link" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "Про нас", about_path, class: "nav-link" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "Контакти", contact_us_path, class: "nav-link" %>
+        </li>
+        <% if current_user.present? %>
+          <%= render 'shared/user_navbar' %>
+        <% elsif current_doctor.present?%>
+          <%= render 'shared/doctor_navbar' %>
+        <% else %>
+          <div style="padding-left: 10px;">
+            <%= button_to 'Увійти', sign_in_path, method: :get, class: 'btn btn-success'%>
+          </div>
+          <div style="padding-left: 10px;">
+            <%= button_to 'Зареєструватись', sign_up_path, method: :get, class: 'btn btn-warning'%>
+          </div>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</nav>

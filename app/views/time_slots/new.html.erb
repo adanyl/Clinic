@@ -1,0 +1,33 @@
+<style>
+  .time-input {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+  }
+
+  .time-input .form-control {
+    margin-right: 10px;
+    width: auto;
+  }
+</style>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 offset-md-3">
+      <h1>Новий тайм слот</h1>
+      <%= form_for :time_slot, url: time_slots_path, class: "needs-validation", novalidate: true do |f| %>
+        <div class="form-group">
+          <%= f.label :date, class: "form-label" %>
+          <%= date_field_tag 'time_slot[date]', nil, class: "form-control", style: "width: auto", required: true %>
+        </div>
+        <div class="form-group">
+          <%= f.label :time, class: "form-label" %>
+          <div class="time-input">
+            <%= f.time_select :time, {}, class: "form-control time-input-select" %>
+          </div>
+        </div>
+        <%= f.submit "Створити", class: "btn btn-primary" %>
+      <% end %>
+    </div>
+  </div>
+</div>

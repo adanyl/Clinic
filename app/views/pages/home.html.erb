@@ -1,0 +1,92 @@
+<div class="container">
+  <h1>Ласкаво просимо до IClinic!</h1>
+</div>
+<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+<ol class="carousel-indicators">
+    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+</ol>
+<div class="carousel-inner">
+    <div class="carousel-item active">
+    <img src="/clinic.jpg" class="d-block w-100" alt="Slide 1">
+    <div class="carousel-caption">
+        <h5>Нова клініка</h5>
+        <p>Все для ваших послуг</p>
+    </div>
+    </div>
+    <div class="carousel-item">
+    <img src="/doctor_2_photo.jpg" class="d-block w-100" alt="Slide 2">
+    <div class="carousel-caption">
+        <h5>Професійні лікарі</h5>
+        <p>Завжди готові допомогти</p>
+    </div>
+    </div>
+    <div class="carousel-item">
+    <img src="/doctor_photo.jpg" class="d-block w-100" alt="Slide 3">
+    <div class="carousel-caption">
+        <h5>Індивідуальний підхід</h5>
+        <p>Допоможемо всім</p>
+    </div>
+    </div>
+</div>
+<a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="sr-only">Попередній слайд</span>
+</a>
+<a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="sr-only">Наступний слайд</span>
+</a>
+</div>
+
+<div class="container mt-5">
+<h2>Давайте познайомимось ближче</h2>
+<div class="row">
+
+    <% if current_doctor || current_user %>
+        <div class="col-md-4">
+        <div class="card mb-4">
+            <div class="card-body">
+            <h5 class="card-title">Подивитись мої записи</h5>
+            <p class="card-text">Подивіться свої записи, перевірте статус</p>
+            <a class="btn btn-primary btn-lg" href="<%=appointments_path%>" role="button">Мої записи</a>
+            </div>
+        </div>
+        </div>
+    <% else %>
+        <div class="col-md-4">
+        <div class="card mb-4">
+            <div class="card-body">
+            <h5 class="card-title">Створити акаунт</h5>
+            <p class="card-text">Створіть акаунт пацієнта і запишіться на прийом</p>
+            <a class="btn btn-primary btn-lg" href="<%=sign_up_path%>" role="button">Реєстрація</a>
+            </div>
+        </div>
+        </div>
+    <% end %>
+
+    <div class="col-md-4">
+    <div class="card mb-4">
+        <div class="card-body">
+        <h5 class="card-title">Наші лікарі</h5>
+        <p class="card-text">Подивіться на наших професіоналів</p>
+        <a class="btn btn-primary btn-lg" href="<%=our_doctors_path%>" role="button">Подивитись лікарів</a>
+        </div>
+    </div>
+    </div>
+    <div class="col-md-4">
+    <div class="card mb-4">
+        <div class="card-body">
+        <h5 class="card-title">Зв'яжіться з нами</h5>
+        <p class="card-text">Завжди готові проконсультувати</p>
+        <a class="btn btn-primary btn-lg" href="<%=contact_us_path%>" role="button">Зв'язатися з нами</a>
+        </div>
+    </div>
+    </div>
+</div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

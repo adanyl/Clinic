@@ -1,0 +1,10 @@
+<h1>Завершення прийому</h1>
+
+<%= form_with(model: @appointment, url: appointment_path(@appointment), method: :put) do |form| %>
+  <div class="form-group">
+    <%= form.label :comment, "Коментар від лікаря" %>
+    <%= form.text_area :comment, class: "form-control", style: "margin-bottom: 12px", rows: 7, required: true %>
+  </div>
+
+  <%= form.submit "Завершити прийом", class: "btn btn-primary" %>
+<% end %>

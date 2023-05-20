@@ -1,15 +1,16 @@
-development:
+default: &default
   adapter: postgresql
   encoding: unicode
-  database: testdb_development
   pool: 5
-  username: oleksii
-  password: 070302
+  username: postgres
+  password: postgres
+  host: localhost
+  port: 5432
+
+development:
+  <<: *default
+  database: iclinic_development
 
 test:
-  adapter: postgresql
-  encoding: unicode
-  database: testdb_test
-  pool: 5
-  username: oleksii
-  password: 070302
+  <<: *default
+  database: iclinic_test

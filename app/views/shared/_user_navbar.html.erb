@@ -1,0 +1,9 @@
+<li class="nav-item">
+  <%= link_to "МоЇ візити до лікарів", appointments_path, class: "nav-link" %>
+</li>
+<div style="padding-left: 60px;">
+    <%= link_to "Профіль пацієнта: #{current_user.name}", edit_user_registration_path, class: "nav-link" %>
+</div>
+<div style="padding-left: 10px;">
+  <%= button_to "Вийти", destroy_user_session_path, method: 'delete', class: 'btn btn-danger' %>
+</div>

@@ -1,0 +1,35 @@
+<h1>Тайм слоти для:</h1>
+<h2 class="card-title"><%= @doctor.name %></h2>
+<h6 class="card-subtitle mb-2 text-muted">Спеціалізація: <%= @doctor.category&.name.presence || 'н.д' %></h6>
+
+<%= form_tag time_slots_path, method: :get, class: "filter-form" do %>
+  <div class="form-group">
+    <%= label_tag :filter_date, "Фільтрувати за датою:" %>
+    <%= date_field_tag :filter_date, params[:filter_date], class: "form-control", style: "width: auto;" %>
+  </div>
+  <%= hidden_field_tag :doctor_id, @doctor.id %>
+  <%= submit_tag "Фільтрувати", class: "btn btn-primary", style: "margin-top: 10px; margin-bottom: 10px" %>
+<% end %>
+
+<div class="row">
+  <% if @time_slots.present? %>
+    <% @time_slots.each do |time_slot| %>
+      <div class="col-lg-2 col-md-3 col-sm-4 col-6">
+        <% if time_slot.available? %>
+          <div class="card square-card mb-3", style="background-color: springgreen;">
+        <% else %>
+          <div class="card square-card mb-3", style="background-color: #D3D3D3;">
+        <% end %>
+          <div class="card-body">
+            <h5 class="card-title">Дата: <%= time_slot.date.strftime("%d/%m/%Y") %></h5>
+            <h6 class="card-title">Час: <%= time_slot.time.strftime("%H:%M") %></h6>
+            <p class="card-text">Статус: <%= time_slot.status.humanize %></p>
+            <%= button_to "Записатись", appointments_path(appointment: {time_slot_id: time_slot.id}, doctor_id: time_slot.doctor.id), method: :post, data: { confirm: "Впевнені, що хочете записатись на обраний час?" }, class: "btn btn-outline-primary", disabled: time_slot.not_available?%>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  <% else %>
+    <h2 class="text-center">Немає тайм слотів для цього лікаря</h2>
+  <% end %>
+</div>

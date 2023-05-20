@@ -1,0 +1,36 @@
+<div class="container">
+  <h1>Наші лікарі</h1>
+  <% if @doctors.present? %>
+    <%= form_tag our_doctors_path, method: 'get', class: 'form-inline' do %>
+      <div class="form-group">
+        <%= label_tag :category_id, 'Фільтр за спеціалізацією:', class: 'mr-2' %>
+        <%= collection_select :doctor, :category_id, @categories, :id, :name, { include_blank: 'Всі спеціалізації', selected: @selected_category_id }, class: 'form-control mr-2', style: 'margin-bottom: 10px' %>
+      </div>
+      <%= submit_tag 'Фільтрувати', class: 'btn btn-primary', style: 'margin-bottom: 10px' %>
+    <% end %>
+  <% end %>
+
+  <div class="row">
+      <% @doctors.each do |doctor| %>
+      <div class="col-md-4" style= "margin-bottom: 20px;">
+          <div class="card h-100">
+              <a href="<%= doctor_path(doctor) %>">
+                <% if doctor.avatar.attached? %>
+                  <%= image_tag(doctor.avatar, :class => "card-img-top", :alt=> "#{doctor.name}")  %>
+                <% else %>
+                  <%= image_tag('/no_avatar.jpg', :class => "card-img-top", :alt=> "#{doctor.name}")  %>
+                <% end %>
+              </a>
+              <div class="card-body">
+                <a href="<%= doctor_path(doctor) %>" class="text-decoration-none text-dark">
+                  <h5 class="card-title"><%= doctor.name %></h5>
+                </a>
+                <h6 class="card-subtitle mb-2 text-muted">Спеціалізація: <%= doctor.category&.name.presence || 'н.д' %></h6>
+                <p class="card-text">Телефон: <%= doctor.phone %></p>
+                <p class="card-text">Електронна пошта: <%= doctor.email.presence || 'н.д' %></p>
+              </div>
+          </div>
+      </div>
+      <% end %>
+  </div>
+</div>

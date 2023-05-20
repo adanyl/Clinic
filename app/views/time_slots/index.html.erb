@@ -1,0 +1,5 @@
+<% if current_doctor %>
+  <%= render 'shared/time_slots/doctor_time_slots' %>
+<% else %>
+  <%= render 'shared/time_slots/user_time_slots' %>
+<% end %>

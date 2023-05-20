@@ -1,0 +1,35 @@
+<style>
+  .doctor-page {
+    margin-top: 20px;
+  }
+
+  .doctor-avatar {
+    max-width: 300px;
+    height: auto;
+    margin-bottom: 20px;
+  }
+</style>
+
+<div class="container doctor-page">
+  <div class="row">
+    <div class="col-md-4">
+      <% if @doctor.avatar.attached? %>
+        <%= image_tag @doctor.avatar.variant(resize: '500x500'), class: 'img-fluid rounded doctor-avatar' %>
+      <% else %>
+        <%= image_tag '/no_avatar.jpg', class: 'img-fluid rounded doctor-avatar' %>
+      <% end %>
+    </div>
+    <div class="col-md-8">
+      <h1><%= @doctor.name %></h1>
+      <p><strong>Спеціалізація:</strong> <%= @doctor.category&.name %></p>
+      <p><strong>Електронна адреса:</strong> <%= @doctor.email %></p>
+      <p><strong>Номер телефону:</strong> <%= @doctor.phone %></p>
+      <p><strong>Опис:</strong> <%= @doctor.description %></p>
+      <% if current_user.present? %>
+        <%= link_to 'Записатись на прийом', time_slots_path(:doctor_id => @doctor.id), class: 'btn btn-primary' %>
+      <% else %>
+        <p><strong>! Щоб записатись до цього лікаря, будь ласка, авторизуйтесь як пацієнт !</p>
+      <% end %>
+    </div>
+  </div>
+</div>

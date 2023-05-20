@@ -1,26 +1,31 @@
-<h1>My appointments</h1>
-<%if current_doctor.present?%>
-<div>
-  <% @appointments.each do |a|%>
-  <div class="card" style="width: 18rem;">
-    <div class="card-body">
-      <h5 class="card-title"><%= a.user.name %></h5>
-      <p class="card-text">Date:  <%=a.date%> </p>
-      <p class="card-text">Time:  <%=a.time.to_s(:time)%> </p>
-    </div>
+<style>
+.card-img {
+    max-height: 270px; /* Задайте желаемую максимальную высоту для фото врача */
+    max-width: 270px; /* Задайте желаемую максимальную ширину для фото врача */
+  }
+</style>
+<div class="row">
+  <div class="col-md-4">
+    <%= form_tag appointments_path, method: :get, class: "form-inline mb-3" do %>
+      <div class="form-group mr-2">
+        <%= label_tag :date, "Дата" %>
+        <%= date_field_tag :date, params[:date], class: "form-control" %>
+      </div>
+      <div class="form-group mr-2">
+        <%= label_tag :status, "Статус" %>
+        <%= select_tag :status, options_for_select(["Заплановані", "Завершені"], params[:status]), class: "form-control", include_blank: 'Всі статуси' %>
+      </div>
+      <%= submit_tag "Фільтрувати", class: "btn btn-primary", style: "margin-top: 12px" %>
+    <% end %>
   </div>
+
+  <% if @appointments.present? %>
+    <% if current_doctor %>
+      <%= render 'shared/appointments/doctor_appointments' %>
+    <% elsif current_user %>
+      <%= render 'shared/appointments/user_appointments' %>
+    <% end %>
+  <% else %>
+    <h2 class="text-center">Нет записей</h2>
+  <% end %>
 </div>
-<%end%>
-<%elsif current_user.present?%>
-<div>
-  <% @appointments.each do |a|%>
-  <div class="card" style="width: 18rem;">
-    <div class="card-body">
-      <h5 class="card-title"><%= a.doctor.name %></h5>
-      <p class="card-text">Date:  <%=a.date%> </p>
-      <p class="card-text">Time:  <%=a.time.to_s(:time)%> </p>
-    </div>
-  </div>
-</div>
-<%end%>
-<%end%>

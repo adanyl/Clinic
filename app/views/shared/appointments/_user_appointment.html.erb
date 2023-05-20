@@ -1,0 +1,19 @@
+<div class="col-md-4">
+  <% if @appointment.doctor.avatar.attached? %>
+    <%= image_tag @appointment.doctor.avatar.variant(resize: '500x500'), class: 'img-fluid rounded doctor-avatar' %>
+  <% else %>
+    <%= image_tag '/no_avatar.jpg', class: 'img-fluid rounded doctor-avatar' %>
+  <% end %>
+</div>
+<div class="col-md-8">
+  <h1>Візит до: <%= @appointment.doctor.name %></h1>
+  <p><strong>Спеціалізація:</strong> <%= @appointment.doctor.category&.name %></p>
+  <p><strong>Дата:</strong> <%= @appointment.time_slot.date.strftime("%d/%m/%Y") %></p>
+  <p><strong>Час:</strong> <%= @appointment.time_slot.time.strftime("%H:%M") %></p>
+  <p><strong>Статус:</strong> <%= @appointment.ukr_status %></p>
+  <% if @appointment.comment.present? %>
+    <p><strong>Коментар доктора:</strong> <%= @appointment.comment %></p>
+  <% end %>
+
+  <%= link_to 'Інформація про лікаря', doctor_path(@appointment.time_slot.doctor), class: 'btn btn-primary' %>
+</div>

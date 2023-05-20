@@ -1,30 +1,22 @@
-<h1>My appointments</h1>
-<%if current_doctor.present?%>
-<a href="/comments/new" class="btn btn-primary">New comment</a>
-<div>
-  <% @appointments.each do |a|%>
-  <div class="card" style="width: 18rem;">
-    <div class="card-body">
-      <h5 class="card-title"><%= a.user.name %></h5>
-       <p class="card-text">Number:  <%=a.id%> </p>
-      <p class="card-text">Date:  <%=a.date%> </p>
-      <p class="card-text">Time:  <%=a.time.to_s(:time)%> </p>
-    </div>
-  </div>
-</div>
-<%end%>
-<%elsif current_user.present?%>
-<div>
-  <% @appointments.each do |a|%>
-  <div class="card" style="width: 18rem;">
-    <div class="card-body">
-      <h5 class="card-title"><%= a.doctor.name %></h5>
-      <p class="card-text">Number:  <%=a.id%> </p>
-      <p class="card-text">Date:  <%=a.date%> </p>
-      <p class="card-text">Time:  <%=a.time.to_s(:time)%> </p>
-    </div>
-  </div>
-</div>
-<%end%>
-<%end%>
+<style>
+  .doctor-page {
+    margin-top: 20px;
+  }
 
+  .doctor-avatar {
+    max-width: 300px;
+    height: auto;
+    margin-bottom: 20px;
+  }
+</style>
+
+
+<div class="container doctor-page">
+  <div class="row">
+  <% if current_doctor %>
+        <%= render 'shared/appointments/doctor_appoinment' %>
+  <% elsif current_user %>
+        <%= render 'shared/appointments/user_appointment' %>
+  <% end %>
+  </div>
+</div>
