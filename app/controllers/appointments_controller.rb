@@ -9,7 +9,7 @@ class AppointmentsController < ApplicationController
     appointment = current_user.appointments.new(appointment_params)
     if appointment.save
       redirect_to time_slots_path(doctor_id: params[:doctor_id]), notice: 'Запис створено'
-      TimeSlot.find(params[:appointment][:time_slot_id]).not_available!
+      TimeSlot.find(params[:appointment][:time_slot_id]).unavailable!
     end
   end
 

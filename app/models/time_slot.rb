@@ -17,5 +17,5 @@ class TimeSlot < ApplicationRecord
   belongs_to :doctor
   has_one :appointment
 
-  enum status: { available: 0, not_available: 1, passed: 2 }
+  enum status: { available: 0, unavailable: 1, passed: 2 }
 end

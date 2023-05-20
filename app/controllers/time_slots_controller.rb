@@ -16,10 +16,10 @@ class TimeSlotsController < ApplicationController
 
   def index
     if current_doctor.present?
-      @time_slots = current_doctor.time_slots.where(status: %i[available not_available])
+      @time_slots = current_doctor.time_slots.where(status: %i[available unavailable])
     else
       @doctor = Doctor.find(params[:doctor_id])
-      @time_slots = @doctor.time_slots.where(status: %i[available not_available])
+      @time_slots = @doctor.time_slots.where(status: %i[available unavailable])
     end
 
     if params[:filter_date].present?

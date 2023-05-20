@@ -22,7 +22,7 @@
             <h5 class="card-title">Дата: <%= time_slot.date.strftime("%d/%m/%Y") %></h5>
             <h6 class="card-title">Час: <%= time_slot.time.strftime("%H:%M") %></h6>
             <p class="card-text">Статус: <%= time_slot.status.humanize %></p>
-            <%= button_to "Видалити", time_slot, method: :delete, data: { confirm: "Are you sure you want to delete this time slot?" }, class: "btn btn-outline-danger", disabled: time_slot.not_available?%>
+            <%= button_to "Видалити", time_slot, method: :delete, data: { confirm: "Are you sure you want to delete this time slot?" }, class: "btn btn-outline-danger", disabled: time_slot.unavailable?%>
           </div>
         </div>
       </div>
