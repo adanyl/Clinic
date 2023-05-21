@@ -4,9 +4,9 @@
 <li class="nav-item">
   <%= link_to "Мої прийоми", appointments_path, method: :get, class: "nav-link" %>
 </li>
-<div style="padding-left: 60px;">
+<div class="login-navbar">
   <%= link_to "Профіль лікаря: #{current_doctor.name}", edit_doctor_registration_path, class: "nav-link" %>
 </div>
-<div style="padding-left: 10px;">
+<div class="login-navbar-button">
   <%= button_to "Вийти", destroy_doctor_session_path, method: 'delete', class: 'btn btn-danger' %>
 </div>
