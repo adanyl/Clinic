@@ -26,7 +26,7 @@ class Appointment < ApplicationRecord
   belongs_to :time_slot, dependent: :destroy
   has_one :doctor, through: :time_slot
 
-  enum status: { scheduled: 0, completed: 1 }
+  enum status: { scheduled: 0, completed: 1, canceled: 2 }
 
   after_save :update_time_slot_status
 
@@ -35,6 +35,13 @@ class Appointment < ApplicationRecord
   end
 
   def ukr_status
-    scheduled? ? 'Заплановано' : 'Завершено'
+    case status
+    when 'scheduled'
+      'Заплановано'
+    when 'completed'
+      'Завершено'
+    else
+      'Скасовано'
+    end
   end
 end

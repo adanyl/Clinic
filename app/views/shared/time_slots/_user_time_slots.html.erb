@@ -24,7 +24,7 @@
             <h5 class="card-title">Дата: <%= time_slot.date.strftime("%d/%m/%Y") %></h5>
             <h6 class="card-title">Час: <%= time_slot.time.strftime("%H:%M") %></h6>
             <p class="card-text">Статус: <%= time_slot.status.humanize %></p>
-            <%= button_to "Записатись", appointments_path(appointment: {time_slot_id: time_slot.id}, doctor_id: time_slot.doctor.id), method: :post, data: { confirm: "Впевнені, що хочете записатись на обраний час?" }, class: "btn btn-outline-primary", disabled: time_slot.unavailable?%>
+            <%= button_to "Записатись", appointments_path(appointment: {time_slot_id: time_slot.id}), method: :post, data: { confirm: "Впевнені, що хочете записатись на обраний час?" }, class: "btn btn-outline-primary", disabled: time_slot.unavailable?%>
           </div>
         </div>
       </div>

@@ -3,12 +3,12 @@
 class AppointmentsController < ApplicationController
   before_action :check_if_logged_in
   before_action :authenticate_user!, only: :create
-  before_action :check_if_doctor, only: %i[edit update]
+  before_action :check_if_doctor, only: :edit
 
   def create
     appointment = current_user.appointments.new(appointment_params)
     if appointment.save
-      redirect_to time_slots_path(doctor_id: params[:doctor_id]), notice: 'Запис створено'
+      redirect_to appointments_path, method: :get, notice: 'Запис створено'
       TimeSlot.find(params[:appointment][:time_slot_id]).unavailable!
     end
   end
@@ -48,8 +48,11 @@ class AppointmentsController < ApplicationController
     @appointment.assign_attributes(appointment_params)
 
     if @appointment.save
-      @appointment.completed!
-      redirect_to @appointment, notice: 'Прийом успішно завершений'
+      redirect_to @appointment, notice: 'Прийом успішно завершений' if @appointment.completed?
+      if @appointment.canceled?
+        @appointment.time_slot.available!
+        redirect_to @appointment, notice: 'Прийом успішно скасований' if @appointment.canceled?
+      end
     else
       flash[:alert] = 'Ви не можете завершити цей прийом'
     end
@@ -58,7 +61,7 @@ class AppointmentsController < ApplicationController
   private
 
   def appointment_params
-    params.require(:appointment).permit(:time_slot_id, :comment)
+    params.require(:appointment).permit(:time_slot_id, :comment, :status)
   end
 
   def filter_appointments(date, _time, status)
@@ -67,6 +70,13 @@ class AppointmentsController < ApplicationController
   end
 
   def appointment_status(status)
-    status.eql?('Заплановані') ? :scheduled : :completed
+    case status
+    when 'Заплановані'
+      :scheduled
+    when 'Завершені'
+      :completed
+    when 'Скасовані'
+      :canceled
+    end
   end
 end

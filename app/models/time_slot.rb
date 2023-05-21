@@ -15,7 +15,7 @@
 class TimeSlot < ApplicationRecord
   validates :time, uniqueness: { scope: %i[doctor_id date] }
   belongs_to :doctor
-  has_one :appointment
+  has_one :appointment, dependent: :destroy
 
   enum status: { available: 0, unavailable: 1, passed: 2 }
 end

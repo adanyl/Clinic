@@ -12,7 +12,7 @@ class PagesController < ApplicationController
   def contact; end
 
   def our_doctors
-    @categories = Category.all
+    @categories = Category.joins(:doctors).distinct
     @selected_category_id = params[:doctor][:category_id] if params[:doctor] && params[:doctor][:category_id]
 
     @doctors = if params[:doctor] && params[:doctor][:category_id]

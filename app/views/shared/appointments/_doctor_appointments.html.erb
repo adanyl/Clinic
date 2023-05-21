@@ -1,9 +1,11 @@
 <% @appointments.each do |appointment| %>
 <div class="col-md-12 mb-3">
     <% if appointment.scheduled? %>
-    <div class="card h-100" style="background-color: springgreen;">
-    <% else %>
-    <div class="card h-100" style="background-color: #D3D3D3;">
+      <div class="card h-100" style="background-color: springgreen;">
+    <% elsif appointment.completed? %>
+      <div class="card h-100" style="background-color: #D3D3D3;">
+    <% elsif appointment.canceled? %>
+      <div class="card h-100" style="background-color: #fa8072;">
     <% end %>
     <div class="row no-gutters">
         <div class="col-md-4">

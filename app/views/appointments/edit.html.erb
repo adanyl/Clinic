@@ -6,5 +6,7 @@
     <%= form.text_area :comment, class: "form-control", style: "margin-bottom: 12px", rows: 7, required: true %>
   </div>
 
+  <%= form.hidden_field :status, value: "completed" %>
+
   <%= form.submit "Завершити прийом", class: "btn btn-primary" %>
 <% end %>

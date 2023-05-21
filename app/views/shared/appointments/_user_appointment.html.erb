@@ -16,4 +16,5 @@
   <% end %>
 
   <%= link_to 'Інформація про лікаря', doctor_path(@appointment.time_slot.doctor), class: 'btn btn-primary' %>
+  <%= link_to 'Скасувати прийом', appointment_path(@appointment, appointment: {status: "canceled"}), method: :put, data: { confirm: "Впевнені, що хочете скасувати прийом?" }, class: 'btn btn-danger' if @appointment.scheduled?%>
 </div>

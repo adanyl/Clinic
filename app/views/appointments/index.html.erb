@@ -14,7 +14,7 @@
       </div>
       <div class="form-group mr-2">
         <%= label_tag :status, "Статус" %>
-        <%= select_tag :status, options_for_select(["Заплановані", "Завершені"], params[:status]), class: "form-control", include_blank: 'Всі статуси' %>
+        <%= select_tag :status, options_for_select(["Заплановані", "Завершені", "Скасовані"], params[:status]), class: "form-control", include_blank: 'Всі статуси' %>
       </div>
       <%= submit_tag "Фільтрувати", class: "btn btn-primary", style: "margin-top: 12px" %>
     <% end %>
@@ -28,6 +28,8 @@
     <% end %>
   <% else %>
     <h2 class="text-center">Немає візитів</h2>
-    <%= link_to 'Створити новий візит', our_doctors_path, class: 'btn btn-primary' if current_user.present? %>
+    <div class="form-group mr-2 text-center">
+      <%= link_to 'Створити новий візит', our_doctors_path, class: 'btn btn-primary' if current_user.present? %>
+    </div>
   <% end %>
 </div>
