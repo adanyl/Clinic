@@ -4,6 +4,7 @@
     max-width: 270px; /* Задайте желаемую максимальную ширину для фото врача */
   }
 </style>
+
 <div class="row">
   <div class="col-md-4">
     <%= form_tag appointments_path, method: :get, class: "form-inline mb-3" do %>
@@ -26,6 +27,7 @@
       <%= render 'shared/appointments/user_appointments' %>
     <% end %>
   <% else %>
-    <h2 class="text-center">Нет записей</h2>
+    <h2 class="text-center">Немає візитів</h2>
+    <%= link_to 'Створити новий візит', our_doctors_path, class: 'btn btn-primary' if current_user.present? %>
   <% end %>
 </div>
