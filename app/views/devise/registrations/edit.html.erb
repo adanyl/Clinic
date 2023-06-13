@@ -1,21 +1,25 @@
-<h2> Редагування профілю </h2>
+<h2> Редагування профілю <%= resource_name.eql?(:doctor) ? 'лікаря' : 'пацієнта' %></h2>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
 
   <div class="form-group">
-    <%= f.label :avatar %>
+    <%= f.label :avatar , "Аватар"%>
     <%= f.file_field :avatar, class: "form-control-file" %>
+
+    <% if f.object.avatar.attached? %>
+      <%= image_tag(f.object.avatar.variant(resize: "100x100"), class: "avatar-image") %>
+    <% end %>
   </div>
 
 
   <div class="form-group">
-    <%= f.label :email %><br />
+    <%= f.label :email, "Елктронна пошта" %><br />
     <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control' %>
   </div>
 
   <div class="form-group">
-    <%= f.label :name %><br />
+    <%= f.label :name, "ПІБ" %><br />
     <%= f.text_field :name, autofocus: true, autocomplete: "name", class: 'form-control' %>
     <br/>
   </div>
@@ -23,12 +27,12 @@
   <% if resource_name.eql?(:doctor) %>
 
     <div class="form-group">
-      <%= f.label :description %><br />
+      <%= f.label :description, "Опис" %><br />
       <%= f.text_field :description, autofocus: true, autocomplete: "description", class: 'form-control' %>
     </div>
 
     <div class="field">
-      <%= f.label :category %>
+      <%= f.label :category, "Спеціалізація" %>
       <%= f.collection_select :category_id, Category.all, :id, :name, { prompt: 'Select category' }, class: 'form-control' %>
       <br/><br/>
     </div>
@@ -40,7 +44,7 @@
   <% end %>
 
   <div class="form-group">
-    <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
+    <%= f.label :password, "Пароль" %> <i>(Залиште порожнім, якщо не хочете змінювати)</i><br />
     <%= f.password_field :password, autocomplete: "new-password", class: 'form-control' %>
     <% if @minimum_password_length %>
       <em><%= @minimum_password_length %> characters minimum</em>
@@ -48,13 +52,13 @@
   </div>
 
   <div class="form-group">
-    <%= f.label :password_confirmation %><br />
+    <%= f.label :password_confirmation, "Підтвердження паролю" %><br />
     <%= f.password_field :password_confirmation, autocomplete: "new-password", class: 'form-control' %>
     <br/>
   </div>
 
   <div class="form-group">
-    <strong><%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
+    <strong><%= f.label :current_password, "Поточний пароль" %> <i>(Нам подрібен ваш пароль для підтвердження змін)</i><br />
     <%= f.password_field :current_password, autocomplete: "current-password", class: 'form-control' %>
     <br/>
   </div>
@@ -69,4 +73,4 @@
 
 <p><%= button_to "Видалити мій акаунт", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: 'btn btn-danger' %></p>
 
-<%= link_to "Back", :back %>
+<%= link_to "Назад", :back %>
